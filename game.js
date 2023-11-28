@@ -35,9 +35,12 @@ function nextSequence(color) {
 }
 
 function levelIncrease() {
-    level++;
-    time = 300;
-    startGame();
+    setTimeout(() => {
+        level++;
+        time = 300;
+        startGame();
+    }, 1000);
+    
 }
 
 function clicked(button) {
@@ -51,14 +54,21 @@ function clicked(button) {
 }
 
 function gameOver() {
-    
+    $("#level-title").text("Game Over, Press Any Key to Restart");
+    let sound = new Audio("./sounds/wrong.mp3");
+    sound.play();
+    gamePattern = [];
+    level = 1;
+    gameStarted = false;
+    sequence = 0;
+    $("body").addClass("game-over");
+    setTimeout(() => {
+        $("body").removeClass("game-over");
+    }, 100);
 }
 
-function playAudio() {
-    
-}
 
-let gameStarted = false;
+var gameStarted = false;
 $(document).on("keydown", function () {
     if (gameStarted === false){
         gameStarted = true;
